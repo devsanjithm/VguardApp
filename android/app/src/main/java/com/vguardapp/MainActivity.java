@@ -1,4 +1,4 @@
-package com.vguardapp;
+package com.vguard;
 
 import com.facebook.react.ReactActivity;
 

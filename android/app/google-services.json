@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "851343607280",
+    "firebase_url": "https://notitle-b8e49-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "notitle-b8e49",
+    "storage_bucket": "notitle-b8e49.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:851343607280:android:f4fb0a18ad130978290935",
+        "android_client_info": {
+          "package_name": "com.vguard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "851343607280-qni22ff8oaincu7jptrdovojtcsq8brv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBJWYyF6_kX8fYbqAoWiJF-4_jiINUsiA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "851343607280-qni22ff8oaincu7jptrdovojtcsq8brv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

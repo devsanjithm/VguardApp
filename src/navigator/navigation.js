@@ -10,7 +10,7 @@ const MyNavigator = () => {
   return (
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="HomeScreen" component={OpenTaskActivity} />
+          <Stack.Screen name="HomeScreen" component={HomeActivity} />
           <Stack.Screen name="OpenTaskScreen" component={OpenTaskActivity} />
         </Stack.Navigator>
       </NavigationContainer>
