@@ -2,7 +2,8 @@ import React from 'react';
 import { Center, NativeBaseProvider, Checkbox, Select, CheckIcon, Input, WarningOutlineIcon, VStack, ScrollView, AspectRatio, Image, Stack, HStack, FormControl, Container, Button, StatusBar, Heading, Box, Text, } from 'native-base';
 
 
-const OpenTaskActivity = () => {
+const OpenTaskActivity = ({ navigation , route })  => {
+    const data = route.params;
     let [service, setService] = React.useState("");
     return (
         <>
@@ -18,7 +19,7 @@ const OpenTaskActivity = () => {
                         }} _light={{
                             backgroundColor: "gray.50"
                         }}>
-                            <Heading >#1234566</Heading>
+                            <Heading >{console.log(data.id)}</Heading>
                             <Text fontSize="md" >29 jan 2022</Text>
                             <Container mt="5" mb="5">
                                 <HStack space={2} mb="3" >

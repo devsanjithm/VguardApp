@@ -1,8 +1,15 @@
 import React from "react";
 import { Badge, VStack, ScrollView, AspectRatio, Stack, Image, HStack, Center, NativeBaseProvider, FormControl, Container, Button, StatusBar, Heading, Box, Text, Card, View, } from 'native-base';
+import { useNavigation } from '@react-navigation/native';
 
-
-const card = (props) => {
+const card =(props) => {
+    const navigation = useNavigation();
+    const OpenTask = (props) => {
+        console.log(props);
+    
+        navigation.navigate("OpenTaskScreen", {data: props});
+        
+      }
     return (
         <View key={props.index}>
             <Box mb="3"alignItems="center">
@@ -26,7 +33,7 @@ const card = (props) => {
                         <HStack space={2} ml="3" >
                             <VStack w="60%" space={2} >
                                 <HStack>
-                                    <Container><Text fontSize="md" m="2" mb="1">Workstation :{props.data.workstation}</Text>
+                                    <Container><Text fontSize="md" m="2" mb="1">Workstation : {props.data.workstation.slice(-1)}</Text>
                                     </Container>
                                 </HStack>
                                 <HStack>
@@ -36,7 +43,7 @@ const card = (props) => {
                             </VStack>
                             <VStack w="40%" mt="5" space={2} alignItems="center">
                                 <Box alignItems="center">
-                                    <Button rounded="full" pl="5" pr="5" onPress={() => console.log("hello world")}>Open</Button>
+                                    <Button rounded="full" pl="5" pr="5" onPress={OpenTask}>Open</Button>
                                 </Box>
                             </VStack>
                         </HStack>
