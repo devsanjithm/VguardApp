@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Card from '../components/card';
-import { NativeBaseProvider, Pressable ,ChevronDownIcon,Text, Button, Box, Select, CheckIcon, HStack } from "native-base";
+import { NativeBaseProvider,Badge , Pressable ,ChevronDownIcon,Text, Button, Box, Select, CheckIcon, HStack } from "native-base";
 import { ScrollView, Image, StyleSheet, } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import DatePicker from 'react-native-date-picker'
@@ -139,12 +139,12 @@ const HomeActivity = ({ navigation }) => {
                     </Box>
                 </HStack>
                 <Pressable onPress={() => setOpen(true)}>
-                    <Box ml="4" mb="5" h="8" rounded="sm" w="92%">
+                    <Badge ml="5" mb="5" h="9" rounded="sm" w="92%">
                     <HStack>
                     <Text m="1" w="90%">{date.toString()}</Text>
                     <ChevronDownIcon w="10%" m="1" size="5" />
                     </HStack>
-                    </Box>
+                    </Badge >
                 </Pressable>
                 <DatePicker
                     modal
@@ -178,7 +178,7 @@ const HomeActivity = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     tinyLogo: {
-        margin: 10,
+        margin: 20,
         width: 140,
         height: 50,
     },
