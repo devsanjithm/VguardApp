@@ -21,6 +21,19 @@ const HomeActivity = ({ navigation }) => {
         GetData();
     }, [])
 
+    useEffect(()=>{
+        getsubstation()
+        setsubStation("");
+    },[workstation])
+
+    useEffect(()=>{
+        getAllData()
+    },[pickdate])
+
+    useEffect(()=>{
+     getAllData()   
+    },[substation])
+
     async function GetData() {
         const formValues = [];
         await firestore()
@@ -54,7 +67,6 @@ const HomeActivity = ({ navigation }) => {
 
     async function getAllData() {
         const formValues = [];
-        var today = new Date();
         let month = pickdate.getMonth()+1;
         let tod = pickdate.getDate();
         console.log(tod + " " + month);
@@ -87,12 +99,13 @@ const HomeActivity = ({ navigation }) => {
                     }} />
                 <HStack space={2} mb="3" justifyContent="center">
                     <Box w={{ base: "45%" }}>
-                        <Select bg="#fff" selectedValue={workstation} minWidth="30%" accessibilityLabel="Choose WorkStation" placeholder="Choose WorkStation" _selectedItem={{
+                        <Select selectedValue={workstation} minWidth="30%" accessibilityLabel="Choose WorkStation" placeholder="Choose WorkStation" _selectedItem={{
                             bg: "teal.600",
                             endIcon: <CheckIcon size="5" />
                         }} mt={1} onValueChange={(itemValue) => {
-                            setWorkStation(itemValue)
-                            getsubstation()
+                            // updateworkstation(itemValue);
+                            setWorkStation(itemValue);
+                            
                         }
                         }>
                             {
@@ -103,7 +116,7 @@ const HomeActivity = ({ navigation }) => {
                         </Select>
                     </Box>
                     <Box w={{ base: "45%" }} >
-                        <Select bg="#fff" selectedValue={substation} minWidth="50%" accessibilityLabel="Choose Model" placeholder="Choose Service" _selectedItem={{
+                        <Select selectedValue={substation} minWidth="50%" accessibilityLabel="Choose Model" placeholder="Choose Service" _selectedItem={{
                             bg: "teal.600",
                             endIcon: <CheckIcon size="5" />
                         }} mt={1} onValueChange={(itemValue) => {
@@ -134,10 +147,10 @@ const HomeActivity = ({ navigation }) => {
                     date={pickdate}
                     mode="date"
                     onConfirm={(date) => {
-                        setOpen(false)
                         setpickDate(date)
+                        setOpen(false)
                         setdate(date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate())
-                        getAllData()
+                       
                     }}
                     onCancel={() => {
                         setOpen(false)

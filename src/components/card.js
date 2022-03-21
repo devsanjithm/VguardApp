@@ -4,10 +4,10 @@ import { useNavigation } from '@react-navigation/native';
 
 const card =(props) => {
     const navigation = useNavigation();
-    const OpenTask = (props) => {
-        console.log(props);
-    
-        navigation.navigate("OpenTaskScreen", {data: props});
+    const OpenTask = () => {
+        console.log(props.data);
+        const d = props.data;
+        navigation.navigate("OpenTaskScreen", {id: d.id,date:d.date});
         
       }
     return (
