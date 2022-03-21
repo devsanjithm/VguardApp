@@ -6,6 +6,7 @@ import firestore from '@react-native-firebase/firestore';
 import DatePicker from 'react-native-date-picker'
 
 const HomeActivity = ({ navigation }) => {
+    const [loading,setLoading] = useState(true);
     const [workstation, setWorkStation] = useState("");
     const [substation, setsubStation] = useState("");
     const [error, setError] = useState(null);
@@ -24,6 +25,7 @@ const HomeActivity = ({ navigation }) => {
     useEffect(()=>{
         getsubstation()
         setsubStation("");
+        
     },[workstation])
 
     useEffect(()=>{
@@ -45,6 +47,7 @@ const HomeActivity = ({ navigation }) => {
                 });
             });
         setUpdateWorkStation(formValues);
+        setLoading(false);
         console.log(formValues);
     }
 
@@ -92,6 +95,8 @@ const HomeActivity = ({ navigation }) => {
     return (
         <>
             <NativeBaseProvider>
+                {loading?<Text>Loading ... :)</Text>:
+                <>
                 <Image
                     style={styles.tinyLogo}
                     source={{
@@ -164,6 +169,7 @@ const HomeActivity = ({ navigation }) => {
                     }
 
                 </ScrollView>
+                </>}
             </NativeBaseProvider>
 
         </>

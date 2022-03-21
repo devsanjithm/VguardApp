@@ -9,9 +9,22 @@ const Stack = createNativeStackNavigator();
 const MyNavigator = () => {
   return (
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="HomeScreen" component={HomeActivity} />
-          <Stack.Screen name="OpenTaskScreen" component={OpenTaskActivity} />
+        <Stack.Navigator screenOptions={{ headerShown: true }}>
+          <Stack.Screen name="HomeScreen" component={HomeActivity} 
+          options={{
+            headerShown:false
+          }}/>
+          <Stack.Screen name="OpenTaskScreen" component={OpenTaskActivity} 
+           options={{
+            title: 'Profile',
+            headerTitleStyle: {
+              fontSize: 19,
+              color: "#000"
+            },
+            headerTintColor: "#000",
+            headerTitleAlign: "center"
+          }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
   )
