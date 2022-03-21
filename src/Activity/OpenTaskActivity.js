@@ -1,29 +1,67 @@
 import React, { useEffect, useState } from 'react';
 import { Center, NativeBaseProvider, Checkbox, Select, CheckIcon, Input, WarningOutlineIcon, VStack, ScrollView, AspectRatio, Image, Stack, HStack, FormControl, Container, Button, StatusBar, Heading, Box, Text, } from 'native-base';
 import firestore from '@react-native-firebase/firestore';
+import { Alert } from 'react-native';
 
 const OpenTaskActivity = ({ navigation, route }) => {
     const { id, date } = route.params;
-    let [service, setService] = React.useState("");
     const [data, setData] = useState("");
     const [loading, setLoading] = useState(true);
-
+    const [actualCount,setactualcount] = useState();
+    const [actualtime,setactualtime] = useState();
+    const [reason,setreason] = useState("");
+    const [getReasons,setgetReasons] = useState([]);
     useEffect(() => {
         getData();
     }, [])
 
     async function getData() {
-        await firestore()
+        const formValues = [];
+        const da = await firestore()
             .collection(date)
             .doc(id)
             .get()
             .then(ele => {
                 setData(ele);
-                console.log(ele);
                 setLoading(false);
+            })
+
+         await firestore()
+        .collection("Reasons")
+        .get()
+        .then(querySnapshot => {
+            querySnapshot.forEach(documentSnapshot => {
+                formValues.push(documentSnapshot.data().reason);
             });
+        });
+        setgetReasons(formValues);
     }
   
+
+    async function handleSubmit(){
+        let ActualCount = actualCount
+        let ActualTime =actualtime
+    
+        if(ActualCount.length === 0 && ActualTime.length === 0){
+            return;
+        }
+        const dataupdate = await firestore()
+                            .collection(date)
+                            .doc(id)
+                            .set({
+                                actualCount:ActualCount,
+                                actualTime:ActualTime,
+                                Reason : reason,
+                                status : "Completed"
+                            },{merge:true})
+                            .then(res=>{
+                                console.log("Data Updated SuccessFully");
+                                Alert.alert("Data Updated SuccessFully");
+                            })
+                            .catch(err=>{
+                                console.error("error",err);
+                            })
+    }
 
 
     return (
@@ -72,34 +110,34 @@ const OpenTaskActivity = ({ navigation, route }) => {
                                         <FormControl isInvalid w="100%" mb="5">
                                             <Box mb="3">
                                                 <FormControl.Label>Actual Count</FormControl.Label>
-                                                <Input placeholder="Enter Actual Count" />{true ? null :
+                                                <Input placeholder="Enter Actual Count" onChangeText={(e)=>setactualcount(e)}/>{true ? null :
                                                     <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
                                                         *Needed.
                                                     </FormControl.ErrorMessage>}
                                             </Box>
                                             <Box mb="3">
                                                 <FormControl.Label>Actual Time</FormControl.Label>
-                                                <Input placeholder="Enter Actual Time" />
+                                                <Input placeholder="Enter Actual Time" onChangeText={(e)=>setactualtime(e)}/>
                                                 <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
                                                     *Needed.
                                                 </FormControl.ErrorMessage>
                                             </Box>
                                             <Box mb="3">
                                                 <FormControl.Label>Reason</FormControl.Label>
-                                                <Select selectedValue={service} minWidth="200" accessibilityLabel="Choose Service" placeholder="Choose Service" _selectedItem={{
+                                                <Select selectedValue={reason} minWidth="200" accessibilityLabel="Choose Service" placeholder="Choose Service" _selectedItem={{
                                                     bg: "teal.600",
                                                     endIcon: <CheckIcon size="5" />
-                                                }} mt={1} onValueChange={itemValue => setService(itemValue)}>
-                                                    <Select.Item label="UX Research" value="ux" />
-                                                    <Select.Item label="Web Development" value="web" />
-                                                    <Select.Item label="Cross Platform Development" value="cross" />
-                                                    <Select.Item label="UI Designing" value="ui" />
-                                                    <Select.Item label="Backend Development" value="backend" />
+                                                }} mt={1} onValueChange={itemValue => setreason(itemValue)}>
+                                                    {
+                                                        getReasons.map((ele,index)=>(
+                                                            <Select.Item key={index} label={ele} value={ele} />
+                                                        ))
+                                                    }
                                                 </Select>
                                             </Box>
                                         </FormControl>
                                     </Box>
-                                    <Button w="98%" m="4" onPress={() => console.log("hello world")}>Submit</Button>
+                                    <Button w="98%" m="4" onPress={handleSubmit}>Submit</Button>
                                 </Box>
                             </Box>
                         </ScrollView></>

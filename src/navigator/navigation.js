@@ -16,13 +16,16 @@ const MyNavigator = () => {
           }}/>
           <Stack.Screen name="OpenTaskScreen" component={OpenTaskActivity} 
            options={{
-            title: 'Profile',
+            title: 'TaskScreen',
             headerTitleStyle: {
               fontSize: 19,
               color: "#000"
             },
             headerTintColor: "#000",
-            headerTitleAlign: "center"
+            headerTitleAlign: "center",
+            headerStyle:{
+              
+            }
           }}
           />
         </Stack.Navigator>
