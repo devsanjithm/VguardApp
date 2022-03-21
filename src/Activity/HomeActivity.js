@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Card from '../components/card';
-import { NativeBaseProvider,Badge ,Spinner, Pressable ,ChevronDownIcon,Text, Button, Box, Select, CheckIcon, HStack } from "native-base";
-import { ScrollView, Image, StyleSheet, } from 'react-native';
+import { NativeBaseProvider,Badge ,Spinner,Container, Pressable ,ChevronDownIcon,Text, Button, Box, Select, CheckIcon, HStack } from "native-base";
+import { ScrollView, Image, StyleSheet, View} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import DatePicker from 'react-native-date-picker'
 
@@ -14,26 +14,31 @@ const HomeActivity = ({ navigation }) => {
     const [updateSubStation, setUpdateSubStation] = useState([]);
     const [querydata, setquerydata] = useState([]);
     const [pickdate, setpickDate] = useState(new Date);
+    const [today,settoday] =useState(true);
     const [date , setdate] = useState(pickdate.getFullYear()+"-"+(pickdate.getMonth()+1)+"-"+pickdate.getDate());
     
     const [open, setOpen] = useState(false);
 
     useEffect(() => {
         GetData();
+        datetoday()
     }, [])
 
     useEffect(()=>{
         getsubstation()
         setsubStation("");
+        datetoday()
         
     },[workstation])
 
     useEffect(()=>{
         getAllData()
+        datetoday()
     },[pickdate])
 
     useEffect(()=>{
      getAllData()   
+     datetoday()
     },[substation])
 
     async function GetData() {
@@ -92,11 +97,21 @@ const HomeActivity = ({ navigation }) => {
         setquerydata(formValues);
     }
 
+    function datetoday(){
+        const temptoday = new Date;
+        if(pickdate.getDate()===(temptoday.getDate()) && pickdate.getMonth()===(temptoday.getMonth()) && pickdate.getFullYear()===(temptoday.getFullYear())){
+            settoday(true);
+            
+        }else{
+            settoday(false);
+            
+        }
+    }   
     return (
         <>
             <NativeBaseProvider>
                 {loading?<Spinner margin="auto" color="yellow.500" size="lg" />:
-                <>
+                <View >
                 <Box style={styles.container}>
                 <Image 
                     style={styles.tinyLogo}
@@ -106,8 +121,8 @@ const HomeActivity = ({ navigation }) => {
                 </Box>
                 
                 <HStack space={2} mt="3" mb="3" justifyContent="center">
-                    <Box w={{ base: "45%" }}>
-                        <Select selectedValue={workstation} minWidth="30%" accessibilityLabel="Choose WorkStation" placeholder="Choose WorkStation" _selectedItem={{
+                    <Box w={{ base: "44%" }} > 
+                        <Select borderColor="gray.500" borderWidth="1" selectedValue={workstation} minWidth="30%" accessibilityLabel="Choose WorkStation" placeholder="Choose WorkStation" _selectedItem={{
                             bg: "teal.600",
                             endIcon: <CheckIcon size="5" />
                         }} mt={1} onValueChange={(itemValue) => {
@@ -123,8 +138,8 @@ const HomeActivity = ({ navigation }) => {
                             }
                         </Select>
                     </Box>
-                    <Box w={{ base: "45%" }} >
-                        <Select selectedValue={substation} minWidth="50%" accessibilityLabel="Choose Model" placeholder="Choose Service" _selectedItem={{
+                    <Box w={{ base: "44%" }} >
+                        <Select borderColor="gray.500" borderWidth="1" selectedValue={substation} minWidth="50%" accessibilityLabel="Choose Model" placeholder="Choose Model" _selectedItem={{
                             bg: "teal.600",
                             endIcon: <CheckIcon size="5" />
                         }} mt={1} onValueChange={(itemValue) => {
@@ -142,9 +157,10 @@ const HomeActivity = ({ navigation }) => {
                 </HStack>
                 
                 <Pressable onPress={() => setOpen(true)}>
-                    <Badge  ml="4" mb="2" h="9" rounded="sm" w="92%">
+                    <Badge  bg="light.100" borderWidth="1" ml="4" mb="2" h="9" rounded="sm" w="92%">
                     <HStack>
-                    <Text m="1" w="90%">{date.toString()}</Text>
+                        {today? <Text m="1" w="90%">{"Today - "+date.toString() } </Text>:
+                        <Text m="1" w="90%">{date}</Text>}
                     <ChevronDownIcon w="10%" m="1" size="5" />
                     </HStack>
                     </Badge >
@@ -165,14 +181,15 @@ const HomeActivity = ({ navigation }) => {
                     }}
                 />
                 <ScrollView>
+                <View >
                     {
                         querydata.map((element, index) => (
                             <Card data={element} key={index} />
                         ))
                     }
-
+                    </View>
                 </ScrollView>
-                </>}
+                </View>}
             </NativeBaseProvider>
 
         </>

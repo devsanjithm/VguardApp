@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Center,Spinner, NativeBaseProvider, Modal, Checkbox, Select, CheckIcon, Input, WarningOutlineIcon, VStack, ScrollView, AspectRatio, Image, Stack, HStack, FormControl, Container, Button, StatusBar, Heading, Box, Text, } from 'native-base';
+import { Center, Spinner, NativeBaseProvider, Modal, Checkbox, Select, CheckIcon, Input, WarningOutlineIcon, VStack, ScrollView, AspectRatio, Image, Stack, HStack, FormControl, Container, Button, StatusBar, Heading, Box, Text, } from 'native-base';
 import firestore from '@react-native-firebase/firestore';
 import { Alert } from 'react-native';
 
@@ -41,7 +41,7 @@ const OpenTaskActivity = ({ navigation, route }) => {
 
     async function handleSubmit() {
         let ActualCount = actualCount
-        let ActualTime = actualhr + "hr "+actualmin+"mins"
+        let ActualTime = actualhr + "hr " + actualmin + "mins"
 
         if (ActualCount.length === 0 && ActualTime.length === 0) {
             return;
@@ -76,63 +76,65 @@ const OpenTaskActivity = ({ navigation, route }) => {
                                     <Box w="100%" p="3" m="3" rounded="lg" _dark={{}} _light={{
 
                                     }}>
-                                        <Heading mb="1">id :
-                                            {data._data.id === undefined ? null : data._data.id}
+                                        <Heading mb="1" fontSize="2xl" color="gray.500">id :
+                                            {data._data.id === undefined ? null : data._data.id.slice(1, 8)}<Text color="black">{data._data.id.slice(-4)}</Text>
                                         </Heading>
                                         <Text fontSize="md" mb="6">
                                             {data._data.date}
                                         </Text>
                                         <Container mt="5" mb="5">
-                                            <HStack space={2} mb="5">
+                                            <Box>
+                                            <HStack space={2} mb="8">
                                                 <Text w="50%" fontSize="md">WorkStation          :</Text>
-                                                <Text w="50%" fontSize="md">
+                                                <Text w="50%"  fontSize="md">
                                                     {data._data.workstation === undefined ? null : data._data.workstation.slice(-1)}
                                                 </Text>
                                             </HStack>
-                                            <HStack space={2} mb="5">
+                                            <HStack space={2} mb="8">
                                                 <Text w="50%" fontSize="md">Model                     :</Text>
-                                                <Text w="50%" fontSize="md">
+                                                <Text w="50%"  fontSize="md">
                                                     {data._data.substation === undefined ? null : data._data.substation}
                                                 </Text>
                                             </HStack>
-                                            <HStack space={2} mb="5">
+                                            <HStack space={2} mb="8">
                                                 <Text w="50%" fontSize="md">Planned Count      :</Text>
-                                                <Text w="50%" fontSize="md">
+                                                <Text w="50%"  bold fontSize="md">
                                                     {data._data.count === undefined ? null : data._data.count}
                                                 </Text>
                                             </HStack>
                                             <HStack space={2} mb="5">
                                                 <Text w="50%" fontSize="md">Planned Time        :</Text>
-                                                <Text w="50%" fontSize="md">
+                                                <Text w="50%" bold fontSize="md">
                                                     {data._data.hr === undefined ? null : data._data.hr + "hr " + data._data.min + "min"}
                                                 </Text>
                                             </HStack>
+                                            </Box>
                                         </Container>
                                     </Box>
                                     <Modal size="xl" isOpen={modalVisible} onClose={setModalVisible} avoidKeyboard>
                                         <Modal.Content>
-                                            <Modal.Header>Enter the Values</Modal.Header>
+                                            <Modal.Header>Enter Values to Complete</Modal.Header>
                                             <Modal.Body>
-                                                <FormControl isInvalid w="100%" mb="5">
+                                                <FormControl  w="100%" mt="3" mb="5">
                                                     <Box mb="3">
                                                         <FormControl.Label>Actual Count</FormControl.Label>
-                                                        <Input placeholder="Enter Actual Count" onChangeText={(e) => setactualcount(e)} />
+                                                        <Input keyboardType='number-pad' borderColor="yellow.500" placeholder={data._data.count === undefined ? null : data._data.count} onChangeText={(e) => setactualcount(e)} />
                                                     </Box>
                                                     <Box mb="3">
-                                                    <FormControl.Label>Actual Time</FormControl.Label>
-                                                        <HStack space={2}  justifyContent="center">
-                                                        
+                                                        <FormControl.Label>Actual Time</FormControl.Label>
+                                                        <HStack space={2} justifyContent="center">
+
                                                             <Box w={{ base: "49%" }}>
-                                                            <Input placeholder="Hours"  onChangeText={(e) => setactualhr(e)}/>
+                                                                <Input keyboardType='number-pad' borderColor="yellow.500" placeholder={data._data.hr === undefined ? "Hr" : data._data.hr+" hr"} onChangeText={(e) => setactualhr(e)} />
                                                             </Box>
                                                             <Box w={{ base: "48%" }} >
-                                                            <Input placeholder="Minutes" onChangeText={(e) => setactualmin(e)} />
+                                                                <Input keyboardType='number-pad' borderColor="yellow.500" placeholder={data._data.min === undefined ? "Mins" : data._data.min +" mins"} onChangeText={(e) => setactualmin(e)} />
                                                             </Box>
                                                         </HStack>
                                                     </Box>
                                                     <Box mb="3">
                                                         <FormControl.Label>Reason</FormControl.Label>
-                                                        <Select selectedValue={reason} minWidth="200" accessibilityLabel="Choose" placeholder="Choose Service" _selectedItem={{
+                                                        <Select borderColor="yellow.500" selectedValue={reason} minWidth="200" accessibilityLabel="Choose" placeholder="Choose Reason" _selectedItem={{
                                                             bg: "teal.600",
                                                             endIcon: <CheckIcon size="5" />
                                                         }} mt={1} onValueChange={itemValue => setreason(itemValue)}>
@@ -152,7 +154,7 @@ const OpenTaskActivity = ({ navigation, route }) => {
                                                     }} colorScheme="gray">
                                                         CLOSE
                                                     </Button>
-                                                    <Button colorScheme="yellow" onPress={handleSubmit}>Submit</Button>
+                                                    <Button colorScheme="yellow" onPress={handleSubmit}>SUBMIT</Button>
                                                 </Button.Group>
 
                                             </Modal.Footer>
@@ -162,7 +164,7 @@ const OpenTaskActivity = ({ navigation, route }) => {
                                         <Button colorScheme="yellow" w="98%" m="4" onPress={() => {
                                             setModalVisible(!modalVisible);
                                         }}>
-                                            Mark as Complete
+                                            Mark as Complete?
                                         </Button>
                                     </VStack>
                                 </Box>
