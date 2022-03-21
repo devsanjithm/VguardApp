@@ -27,7 +27,7 @@ const card =(props) => {
                             <Container w="50%"  ><Text fontSize="md" m="2">id:{props.data.id}</Text>
                             </Container>
                             <Container w="50%" alignItems="center">
-                                <Badge rounded="8" m="2" mr="-13"><Text fontSize="sm" w="60%">{props.data.status}</Text></Badge>
+                                <Badge colorScheme="black" variant="outline" rounded="8" m="2" mr="-13"><Text fontSize="sm" w="60%">{props.data.status}</Text></Badge>
                             </Container>
                         </HStack>
                         <HStack space={2} ml="3" >
@@ -43,7 +43,7 @@ const card =(props) => {
                             </VStack>
                             <VStack w="40%" mt="5" space={2} alignItems="center">
                                 <Box alignItems="center">
-                                    <Button rounded="full" pl="5" pr="5" onPress={OpenTask}>Open</Button>
+                                    <Button colorScheme="yellow" rounded="full" pl="5" pr="5" onPress={OpenTask}>Open</Button>
                                 </Box>
                             </VStack>
                         </HStack>

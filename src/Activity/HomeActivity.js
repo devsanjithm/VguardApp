@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Card from '../components/card';
-import { NativeBaseProvider,Badge , Pressable ,ChevronDownIcon,Text, Button, Box, Select, CheckIcon, HStack } from "native-base";
+import { NativeBaseProvider,Badge ,Spinner, Pressable ,ChevronDownIcon,Text, Button, Box, Select, CheckIcon, HStack } from "native-base";
 import { ScrollView, Image, StyleSheet, } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import DatePicker from 'react-native-date-picker'
@@ -95,14 +95,17 @@ const HomeActivity = ({ navigation }) => {
     return (
         <>
             <NativeBaseProvider>
-                {loading?<Text>Loading ... :)</Text>:
+                {loading?<Spinner margin="auto" color="yellow.500" size="lg" />:
                 <>
-                <Image
+                <Box style={styles.container}>
+                <Image 
                     style={styles.tinyLogo}
                     source={{
                         uri: 'https://www.vguard.in/waterpurifier/assets/images/logo.png',
                     }} />
-                <HStack space={2} mb="3" justifyContent="center">
+                </Box>
+                
+                <HStack space={2} mt="3" mb="3" justifyContent="center">
                     <Box w={{ base: "45%" }}>
                         <Select selectedValue={workstation} minWidth="30%" accessibilityLabel="Choose WorkStation" placeholder="Choose WorkStation" _selectedItem={{
                             bg: "teal.600",
@@ -129,7 +132,6 @@ const HomeActivity = ({ navigation }) => {
                             getAllData()
                         }
                         }>
-                            <Select.Item key={0} label="All" value="All" />
                             {
                                 updateSubStation.map((element, index) => (
                                     <Select.Item key={index + 1} label={element} value={element} />
@@ -138,8 +140,9 @@ const HomeActivity = ({ navigation }) => {
                         </Select>
                     </Box>
                 </HStack>
+                
                 <Pressable onPress={() => setOpen(true)}>
-                    <Badge ml="5" mb="5" h="9" rounded="sm" w="92%">
+                    <Badge  ml="4" mb="2" h="9" rounded="sm" w="92%">
                     <HStack>
                     <Text m="1" w="90%">{date.toString()}</Text>
                     <ChevronDownIcon w="10%" m="1" size="5" />
@@ -183,8 +186,6 @@ const styles = StyleSheet.create({
         height: 50,
     },
     container: {
-        flex: 1,
-        paddingTop: 40,
         alignItems: "center"
     }
 });

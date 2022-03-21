@@ -21,6 +21,7 @@
     "react-native-safe-area-context": "^3.4.1",
     "react-native-screens": "^3.13.1",
     "react-native-svg": "^12.1.0",
+    "react-native-toast-notifications": "^3.2.3",
     "styled-components": "^5.3.3",
     "styled-system": "^5.1.5"
   },
