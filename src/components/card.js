@@ -24,10 +24,10 @@ const card =(props) => {
                 }}>
                     <VStack space={2} alignItems="center">
                         <HStack space={2} ml="3" justifyContent="center">
-                            <Container w="60%"  ><Text fontSize="md" m="2">id:{props.data.id}</Text>
+                            <Container w="50%"  ><Text fontSize="md" m="2">id:{props.data.id}</Text>
                             </Container>
-                            <Container w="40%" alignItems="center">
-                                <Badge rounded="8" m="2"><Text fontSize="sm" w="60%">{props.data.status}</Text></Badge>
+                            <Container w="50%" alignItems="center">
+                                <Badge rounded="8" m="2" mr="-13"><Text fontSize="sm" w="60%">{props.data.status}</Text></Badge>
                             </Container>
                         </HStack>
                         <HStack space={2} ml="3" >
