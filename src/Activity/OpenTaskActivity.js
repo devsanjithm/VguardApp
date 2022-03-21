@@ -41,7 +41,7 @@ const OpenTaskActivity = ({ navigation, route }) => {
 
     async function handleSubmit() {
         let ActualCount = actualCount
-        let ActualTime = actualhr + "hr "+actualmin
+        let ActualTime = actualhr + "hr "+actualmin+"mins"
 
         if (ActualCount.length === 0 && ActualTime.length === 0) {
             return;
