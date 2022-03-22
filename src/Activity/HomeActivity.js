@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Card from '../components/card';
-import { NativeBaseProvider,Badge ,Spinner,Container, Pressable ,ChevronDownIcon,Text, Button, Box, Select, CheckIcon, HStack } from "native-base";
+import { NativeBaseProvider,StatusBar,Badge ,Spinner,Container, Pressable ,ChevronDownIcon,Text, Button, Box, Select, CheckIcon, HStack } from "native-base";
 import { ScrollView, Image, StyleSheet, View} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import DatePicker from 'react-native-date-picker'
+import { background } from 'styled-system';
 
 const HomeActivity = ({ navigation }) => {
     const [loading,setLoading] = useState(true);
@@ -109,9 +110,11 @@ const HomeActivity = ({ navigation }) => {
     }   
     return (
         <>
+      
             <NativeBaseProvider>
                 {loading?<Spinner margin="auto" color="yellow.500" size="lg" />:
-                <View >
+                <>
+                  <StatusBar backgroundColor="black" />
                 <Box style={styles.container}>
                 <Image 
                     style={styles.tinyLogo}
@@ -181,15 +184,12 @@ const HomeActivity = ({ navigation }) => {
                     }}
                 />
                 <ScrollView>
-                <View >
                     {
                         querydata.map((element, index) => (
                             <Card data={element} key={index} />
                         ))
                     }
-                    </View>
-                </ScrollView>
-                </View>}
+                </ScrollView></>}
             </NativeBaseProvider>
 
         </>
@@ -204,6 +204,10 @@ const styles = StyleSheet.create({
     },
     container: {
         alignItems: "center"
+    },
+
+    background:{
+        backgroundColor:"black",
     }
 });
 

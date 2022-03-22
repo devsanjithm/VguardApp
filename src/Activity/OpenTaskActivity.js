@@ -85,26 +85,26 @@ const OpenTaskActivity = ({ navigation, route }) => {
                                         <Container mt="5" mb="5">
                                             <Box>
                                             <HStack space={2} mb="8">
-                                                <Text w="50%" fontSize="md">WorkStation          :</Text>
-                                                <Text w="50%"  fontSize="md">
+                                                <Text w="60%" fontSize="md">WorkStation          :</Text>
+                                                <Text w="40%"  fontSize="md">
                                                     {data._data.workstation === undefined ? null : data._data.workstation.slice(-1)}
                                                 </Text>
                                             </HStack>
                                             <HStack space={2} mb="8">
-                                                <Text w="50%" fontSize="md">Model                     :</Text>
-                                                <Text w="50%"  fontSize="md">
+                                                <Text w="60%" fontSize="md">Model                     :</Text>
+                                                <Text w="40%"  fontSize="md">
                                                     {data._data.substation === undefined ? null : data._data.substation}
                                                 </Text>
                                             </HStack>
                                             <HStack space={2} mb="8">
-                                                <Text w="50%" fontSize="md">Planned Count      :</Text>
-                                                <Text w="50%"  bold fontSize="md">
+                                                <Text w="60%" fontSize="md">Planned Count      :</Text>
+                                                <Text w="40%"  bold fontSize="md">
                                                     {data._data.count === undefined ? null : data._data.count}
                                                 </Text>
                                             </HStack>
                                             <HStack space={2} mb="5">
-                                                <Text w="50%" fontSize="md">Planned Time        :</Text>
-                                                <Text w="50%" bold fontSize="md">
+                                                <Text w="60%" fontSize="md">Planned Time        :</Text>
+                                                <Text w="40%" bold fontSize="md">
                                                     {data._data.hr === undefined ? null : data._data.hr + "hr " + data._data.min + "min"}
                                                 </Text>
                                             </HStack>
