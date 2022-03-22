@@ -27,8 +27,6 @@ const HomeActivity = ({ navigation }) => {
     }, [])
 
     useEffect(() => {
-        setquerydata([])
-        setquerydata([])
         getsubstation()
         setsubStation("");
         datetoday()
@@ -37,20 +35,19 @@ const HomeActivity = ({ navigation }) => {
     }, [workstation])
 
     useEffect(() => {
-        setquerydata([])
         getAllData()
         datetoday()
 
     }, [pickdate])
 
     useEffect(() => {
-        setquerydata([])
         getAllData()
         datetoday()
 
     }, [substation])
 
     async function GetData() {
+        setquerydata([])
         const formValues = [];
         await firestore()
             .collection('workstation')
@@ -84,6 +81,7 @@ const HomeActivity = ({ navigation }) => {
     }
 
     async function getAllData() {
+        setquerydata([])
         settaskloading(true)
         const formValues = [];
         let month = pickdate.getMonth() + 1;
@@ -111,6 +109,7 @@ const HomeActivity = ({ navigation }) => {
     }
 
     function datetoday() {
+        setquerydata([])
         const temptoday = new Date;
         if (pickdate.getDate() === (temptoday.getDate()) && pickdate.getMonth() === (temptoday.getMonth()) && pickdate.getFullYear() === (temptoday.getFullYear())) {
             settoday(true);
@@ -196,7 +195,7 @@ const HomeActivity = ({ navigation }) => {
                             }}
                         />
                         <ScrollView>
-                            {taskloading ? <Spinner margin="auto" mt="50" color="yellow.500" size="lg" /> :
+                            {taskloading ? <Spinner  margin="auto" mt="50" color="yellow.500" size="lg" /> :
                                 querydata.length===0 ? <Text margin="auto"  mt="50" color="gray.500" >No task found</Text>
                                     :
                                     querydata.map((element, index) => (
