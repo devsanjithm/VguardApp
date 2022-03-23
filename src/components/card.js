@@ -1,5 +1,5 @@
 import React from "react";
-import { Badge, VStack, ScrollView, AspectRatio, Stack, Image, HStack, Center, NativeBaseProvider, FormControl, Container, Button, StatusBar, Heading, Box, Text, Card, View, } from 'native-base';
+import { Badge, VStack, HStack, Container, Button, Box, Text,View, } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
 
 const card =(props) => {
@@ -15,7 +15,7 @@ const card =(props) => {
             <Box mb="3"alignItems="center" >
                 <Box maxW="90%" rounded="lg" overflow="hidden" borderColor="gray.500" borderWidth="1" _dark={{
                     borderColor: "coolGray.600",
-                    backgroundColor: "gray.700"
+                    backgroundColor: "gray.00"
                 }} _web={{
                     shadow: 2,
                     borderWidth: 0
@@ -24,7 +24,7 @@ const card =(props) => {
                 }}>
                     <VStack space={2} alignItems="center">
                         <HStack space={2} ml="3" justifyContent="center">
-                            <Container w="50%"  ><Text fontSize="md" m="2" color= "gray.500">id:{props.data.id.slice(1,8)}<Text color= "black" bold >{props.data.id.slice(-4)}</Text></Text>
+                            <Container w="50%"  ><Text fontSize="md" m="2" color= "gray.500">id:{props.data.id.slice(1,8)}<Text  color="light.100" bold >{props.data.id.slice(-4)}</Text></Text>
                             </Container>
                             <Container w="50%" alignItems="center">
                                 <Badge colorScheme="black" borderColor="gray.400" variant="outline" rounded="8" m="2" mr="-10"><Text fontSize="sm" w="60%">{props.data.status}</Text></Badge>
