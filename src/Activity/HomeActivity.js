@@ -4,6 +4,9 @@ import { NativeBaseProvider, StatusBar, extendTheme, Badge, Spinner, Pressable, 
 import { ScrollView, Image, StyleSheet, RefreshControl } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import DatePicker from 'react-native-date-picker';
+import { useIsFocused } from '@react-navigation/native';
+ 
+
 
 const HomeActivity = ({ navigation }) => {
     const [refreshing, setRefreshing] = React.useState(false);
@@ -18,6 +21,7 @@ const HomeActivity = ({ navigation }) => {
     const [taskloading, settaskloading] = useState(false);
     const [date, setdate] = useState(pickdate.getFullYear() + "-" + (pickdate.getMonth() + 1) + "-" + pickdate.getDate());
     const [open, setOpen] = useState(false);
+    const isFocused = useIsFocused();
 
     
     const onRefresh = () => {
@@ -26,12 +30,9 @@ const HomeActivity = ({ navigation }) => {
         setRefreshing(false));
     }
 
-    React.useEffect(() => {
-        const unsubscribe = navigation.addListener('focus', () => {
-            getAllData()
-        });
-        return unsubscribe;
-      }, [navigation]);
+    useEffect(() => {
+        getAllData()
+      }, [isFocused]);
 
 
     useEffect(() => {
@@ -94,7 +95,6 @@ const HomeActivity = ({ navigation }) => {
     }
 
     async function getAllData() {
-        setquerydata([])
         settaskloading(true)
         const formValues = [];
         let month = pickdate.getMonth() + 1;
@@ -156,9 +156,7 @@ const HomeActivity = ({ navigation }) => {
                                 <Box style={styles.container}>
                                     <Image
                                         style={styles.tinyLogo}
-                                        source={{
-                                            uri: 'https://www.vguard.in/waterpurifier/assets/images/logo.png',
-                                        }} />
+                                        source={require('../components/logo.png')} />
                                 </Box>
 
                                 <HStack space={2} mt="3" mb="3" justifyContent="center">

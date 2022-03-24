@@ -213,7 +213,7 @@ const OpenTaskActivity = ({ navigation, route }) => {
                                             Mark as Complete?
                                         </Button>
                                     </VStack> :
-                                        <Box ml="5" mb="5" p="4" maxW="80" rounded="lg" overflow="hidden" borderColor="coolGray.200" borderWidth="1" _dark={{
+                                        <Box ml="5" mb="5"  p="4" w="90%" rounded="lg" overflow="hidden" borderColor="coolGray.200" borderWidth="1" _dark={{
                                             borderColor: "coolGray.600",
                                             backgroundColor: "yellow.500"
                                         }} _web={{
@@ -222,7 +222,7 @@ const OpenTaskActivity = ({ navigation, route }) => {
                                         }} _light={{
                                             backgroundColor: "gray.50"
                                         }}>
-                                            <Box>
+                                            <Box >
                                                 <HStack space={2} mb="8">
                                                     <Text w="60%" color="gray.900" fontSize="md">Actual Count      :</Text>
                                                     <Text w="40%" color="gray.900" bold fontSize="md">
